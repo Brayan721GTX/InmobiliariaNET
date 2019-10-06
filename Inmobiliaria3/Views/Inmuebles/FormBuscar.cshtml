@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "FormBuscar";
+}
+
+<h1>FormBuscar</h1>
+
+<form asp-action="Buscar" method="POST">
+    <div class="form-group">
+        <label for="sel1">Seleccione un uso:</label>
+        <select class="form-control" name="Uso">
+            <option value="Comercial">Comercial</option>
+            <option value="Residencial">Residencial</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="sel1">Seleccione un tipo:</label>
+        <select class="form-control" name="Tipo">
+            <option value="Departamento">Departamento</option>
+            <option value="Local">Local</option>
+            <option value="Depósito">Depósito</option>
+            <option value="Oficina individual">Oficina individual</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="usr">Ambientes:</label>
+        <input type="number" class="form-control" name="Ambientes">
+    </div>
+
+    <div class="form-group">
+        <label for="usr">Precio aproximado:</label>
+        <input type="number" class="form-control" name="Precio">
+    </div>
+
+    <input type="submit" value="Buscar" class="btn btn-primary" asp-action="Buscar" />
+</form>
