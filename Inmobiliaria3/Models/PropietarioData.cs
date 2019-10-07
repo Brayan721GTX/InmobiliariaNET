@@ -134,5 +134,26 @@ namespace Inmobiliaria3.Models
 
             return null;
         }
+
+        public void editar(Propietario propietario)
+        {
+            SqlConnection conn = Conexion.getConnection();
+
+            String sql = "UPDATE propietario SET dni=@dni, apellido=@apellido, nombre=@nombre, telefono=@telefono, mail=@mail, password=@password WHERE id = "+propietario.Id;
+
+            SqlCommand command = new SqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@dni", propietario.Dni);
+            command.Parameters.AddWithValue("@apellido", propietario.Apellido);
+            command.Parameters.AddWithValue("@nombre", propietario.Nombre);
+            command.Parameters.AddWithValue("@telefono", propietario.Telefono);
+            command.Parameters.AddWithValue("@mail", propietario.Mail);
+            command.Parameters.AddWithValue("@password", propietario.Password);
+
+            conn.Open();
+
+            command.ExecuteReader();
+
+            conn.Close();
+        }
     }
 }

@@ -31,6 +31,27 @@ namespace Inmobiliaria3.Models
             return id;
         }
 
+        public void editar(Inmueble inmueble)
+        {
+            SqlConnection conn = Conexion.getConnection();
+
+            String sql = "UPDATE inmueble SET direccion=@direccion, ambientes=@ambientes, tipo=@tipo, uso=@uso, precio=@precio, disponible=@disponible WHERE id = "+inmueble.Id;
+
+            SqlCommand command = new SqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@direccion", inmueble.Direccion);
+            command.Parameters.AddWithValue("@ambientes", inmueble.Ambientes);
+            command.Parameters.AddWithValue("@tipo", inmueble.Tipo);
+            command.Parameters.AddWithValue("@uso", inmueble.Uso);
+            command.Parameters.AddWithValue("@precio", inmueble.Precio);
+            command.Parameters.AddWithValue("@disponible", inmueble.Disponible);
+
+            conn.Open();
+
+            command.ExecuteReader();
+
+            conn.Close();
+        }
+
         public List<Inmueble> obtenerInmueblesDisponibles()
         {
             SqlConnection conn = Conexion.getConnection();

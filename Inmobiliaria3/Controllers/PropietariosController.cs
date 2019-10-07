@@ -54,17 +54,18 @@ namespace Inmobiliaria3.Controllers
         // GET: Propietario/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.p = new PropietarioData().obtenerPropietario(id);
             return View();
         }
 
         // POST: Propietario/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Propietario p)
         {
             try
             {
-                // TODO: Add update logic here
+                new PropietarioData().editar(p);
 
                 return RedirectToAction(nameof(Index));
             }

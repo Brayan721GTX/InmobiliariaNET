@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista de inmuebles</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Crar nuevo inmueble</a>
@@ -65,6 +65,7 @@
             <td>
                 @Html.ActionLink("Ver contratos", "ListarContratos", "Alquileres", new { id = item.Id }) |
                 @Html.ActionLink("Alquilar", "Alquilar", new { IdInmueble = item.Id }) |
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
             </td>
         </tr>

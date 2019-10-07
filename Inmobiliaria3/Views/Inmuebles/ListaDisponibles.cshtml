@@ -4,10 +4,10 @@
     ViewData["Title"] = "ListaDisponibles";
 }
 
-<h1>ListaDisponibles</h1>
+<h1>Lista de inmuebles disponibles</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo inmueble</a>
 </p>
 <table class="table">
     <thead>
@@ -63,6 +63,7 @@
             <td>
                 @Html.ActionLink("Ver contratos", "ListarContratos", "Alquileres", new { id = item.Id }) |
                 @Html.ActionLink("Alquilar", "Alquilar", new { IdInmueble = item.Id }) |
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
             </td>
         </tr>

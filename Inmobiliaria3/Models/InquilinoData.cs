@@ -93,11 +93,31 @@ namespace Inmobiliaria3.Models
             conn.Open();
 
             int id = Convert.ToInt32(command.ExecuteScalar());
-            System.Diagnostics.Debug.WriteLine("IDDDDDDDDDDDDDDDDDDDD NUEVO: "+id);
+            System.Diagnostics.Debug.WriteLine("IDDDDDDDDDDDDDDDDDDDD NUEVO: " + id);
 
             conn.Close();
 
             return id;
+        }
+
+        public void editar(Inquilino inquilino)
+        {
+            SqlConnection conn = Conexion.getConnection();
+
+            String sql = "UPDATE inquilino SET dni = @dni, apellido=@apellido, nombre = @nombre, direccion=@direccion, telefono=@telefono WHERE id = "+inquilino.Id;
+
+            SqlCommand command = new SqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@dni", inquilino.Dni);
+            command.Parameters.AddWithValue("@apellido", inquilino.Apellido);
+            command.Parameters.AddWithValue("@nombre", inquilino.Nombre);
+            command.Parameters.AddWithValue("@direccion", inquilino.Direccion);
+            command.Parameters.AddWithValue("@telefono", inquilino.Telefono);
+
+            conn.Open();
+
+            command.ExecuteScalar();
+
+            conn.Close();
         }
 
         public Inquilino eliminar(int id)

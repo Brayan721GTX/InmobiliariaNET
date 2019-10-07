@@ -4,10 +4,10 @@
     ViewData["Title"] = "ListarContratos";
 }
 
-<h1>ListarContratos</h1>
+<h1>Lista de contratos de alquiler</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo contrato</a>
 </p>
 <table class="table">
     <thead>
@@ -49,9 +49,17 @@
                 @item.Inquilino.Nombre;
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Ver pagos", "Details", new { id = item.Id }) |
+
+                @if (DateTime.Compare(item.FechaFin, DateTime.Now) > 0)
+                {
+
+                    @Html.ActionLink("Cancelar contrato", "Cancelar", new { id = item.Id })
+                }
+                else
+                {
+                    @Html.ActionLink("Renovar contrato", "Renovar", new { id = item.Id })
+                }
             </td>
         </tr>
 }
