@@ -14,7 +14,7 @@ namespace Inmobiliaria3.Controllers
         public ActionResult Index(int idAlquiler)
         {
             ViewBag.IdAlquiler = idAlquiler;
-            System.Diagnostics.Debug.WriteLine("IdAlquiler Index: "+idAlquiler);
+            System.Diagnostics.Debug.WriteLine("IdAlquiler Index: "+ idAlquiler);
             PagosData pagosData = new PagosData();
             var pagos = pagosData.obtenerPagos(idAlquiler);
             return View(pagos);

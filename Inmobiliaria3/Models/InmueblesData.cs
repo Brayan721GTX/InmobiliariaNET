@@ -323,21 +323,25 @@ namespace Inmobiliaria3.Models
             conn.Close();
         }
 
-        public Inquilino eliminar(int id)
+        public void eliminar(int id)
         {
             SqlConnection conn = Conexion.getConnection();
 
-            String sql = "DELETE FROM inmueble WHERE id = " + id;
-
-            SqlCommand command = new SqlCommand(sql, conn);
-
             conn.Open();
 
-            var reader = command.ExecuteReader();
+            List<Alquiler> alquileres = new AlquilerData().obtenerAlquileresDeInmueble(id);
+
+            foreach(Alquiler a in alquileres) {
+                new AlquilerData().eliminar(a.Id);
+                new InquilinoData().eliminar(a.Inquilino.Id);
+            }
+
+            String sql = "DELETE FROM inmueble WHERE id = " + id;
+
+            SqlCommand command1 = new SqlCommand(sql, conn);
+            command1.ExecuteReader();
 
             conn.Close();
-
-            return null;
         }
     }
 }

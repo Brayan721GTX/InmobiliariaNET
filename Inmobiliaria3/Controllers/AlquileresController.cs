@@ -15,6 +15,7 @@ namespace Inmobiliaria3.Controllers
         {
             AlquilerData alquilerData = new AlquilerData();
             var alquileres = alquilerData.obtenerAlquileres();
+            System.Diagnostics.Debug.WriteLine("Numer de inquilinos: " + alquileres.Count);
             return View(alquileres);
         }
 
@@ -29,6 +30,7 @@ namespace Inmobiliaria3.Controllers
         // GET: Alquiler
         public ActionResult ListarContratos(int id)
         {
+            ViewBag.idInmueble = id;
             AlquilerData alquilerData = new AlquilerData();
             var alquileres = alquilerData.obtenerAlquileresDeInmueble(id);
             return View(alquileres);
@@ -41,9 +43,10 @@ namespace Inmobiliaria3.Controllers
         }
 
         // GET: Alquiler/Create
-        public ActionResult Create(int idInmueble)
+        public ActionResult Create(int id)
         {
-            ViewBag.idInmueble = idInmueble;
+            ViewBag.IdInmueble = id;
+            System.Diagnostics.Debug.WriteLine("ID INMUEBLE: "+ id);
             ViewBag.Inquilinos = new InquilinoData().obtenerInquilinos();
             ViewBag.Inmuebles = new InmueblesData().obtenerInmuebles();
 
@@ -76,7 +79,7 @@ namespace Inmobiliaria3.Controllers
                 System.Diagnostics.Debug.WriteLine("AAA4");
 
                 InmueblesData inmuebleData = new InmueblesData();
-                int idInmueble = Convert.ToInt32(Request.Form["IdInmueble"]);
+                int idInmueble = Convert.ToInt32(collection["IdInmueble"]);
                 System.Diagnostics.Debug.WriteLine("ID INMUEBLE: "+idInmueble);
                 Inmueble inmueble = inmuebleData.obtenerInmueble(idInmueble);
                 inmuebleData.marcarComoAlquilado(idInmueble);
@@ -141,24 +144,33 @@ namespace Inmobiliaria3.Controllers
         }
 
         // GET: Alquiler/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, int IdInmueble)
         {
+            System.Diagnostics.Debug.WriteLine("Id de alquiler GET: " + id);
+            Alquiler a = new AlquilerData().obtenerAlquiler(id);
+            ViewBag.Id = id;
+            ViewBag.Precio = a.Precio;
+            ViewBag.FechaInicio = a.FechaInicio;
+            ViewBag.FechaFin = a.FechaFin;
             return View();
         }
 
         // POST: Alquiler/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Alquiler alquiler, int IdInmueble)
         {
             try
             {
+                System.Diagnostics.Debug.WriteLine("Id de alquiler POST: "+alquiler.Id);
+                new AlquilerData().editar(alquiler);
                 // TODO: Add update logic here
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
+                System.Diagnostics.Debug.WriteLine("Excepcion Create POST: " + e.Message);
                 return View();
             }
         }
@@ -168,7 +180,7 @@ namespace Inmobiliaria3.Controllers
         {
             new AlquilerData().eliminar(id);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ListarContratos", new { id = id });
         }
 
         // POST: Alquiler/Delete/5
@@ -180,7 +192,7 @@ namespace Inmobiliaria3.Controllers
             {
                 new AlquilerData().eliminar(id);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("ListarContratos", new { id = id });
             }
             catch
             {

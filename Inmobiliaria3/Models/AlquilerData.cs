@@ -139,7 +139,7 @@ namespace Inmobiliaria3.Models
             //SqlConnection conn = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=inmobiliaria;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             SqlConnection conn = Conexion.getConnection();
 
-            String sql = "SELECT * FROM alquiler WHERE id = "+idAlquiler;
+            String sql = "SELECT * FROM alquiler WHERE Id = "+idAlquiler;
 
             SqlCommand command = new SqlCommand(sql, conn);
 
@@ -238,6 +238,24 @@ namespace Inmobiliaria3.Models
             conn.Open();
 
             var reader = command.ExecuteReader();
+
+            conn.Close();
+        }
+
+        public void editar(Alquiler alquiler)
+        {
+            SqlConnection conn = Conexion.getConnection();
+
+            String sql = "UPDATE alquiler SET precio=@precio, fecha_inicio=@fecha_inicio, fecha_fin=@fecha_fin WHERE id = " + alquiler.Id;
+
+            SqlCommand command = new SqlCommand(sql, conn);
+            command.Parameters.AddWithValue("@precio", alquiler.Precio);
+            command.Parameters.AddWithValue("@fecha_inicio", alquiler.FechaInicio);
+            command.Parameters.AddWithValue("@fecha_fin", alquiler.FechaFin);
+
+            conn.Open();
+
+            command.ExecuteScalar();
 
             conn.Close();
         }

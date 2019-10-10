@@ -30,9 +30,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Mail)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -58,11 +55,8 @@
                 @Html.DisplayFor(modelItem => item.Mail)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
                 @Html.ActionLink("Ver inmuebles", "ListaInmueblesPropietario", "Inmuebles", new { id = item.Id }) |
-                @Html.ActionLink("Editar", "Edit", new { id = item.Id })
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
             </td>
         </tr>

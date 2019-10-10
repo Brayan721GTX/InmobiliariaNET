@@ -43,6 +43,9 @@
                 @Html.DisplayFor(modelItem => item.FechaFin)
             </td>
             <td>
+                @item.Inquilino.Nombre
+            </td>
+            <td>
                 @Html.ActionLink("Ver pagos", "Details", new { id = item.Id }) |
 
                 @if (DateTime.Compare(item.FechaFin, DateTime.Now) > 0)
@@ -54,6 +57,8 @@
                 {
                     @Html.ActionLink("Renovar contrato", "Renovar", new { id = item.Id })
                 }
+                | @Html.ActionLink("Editar", "Edit", new { id = item.Id, idInmueble = ViewBag.idInmueble }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.Id }) |
             </td>
         </tr>
 }

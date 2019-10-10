@@ -1,40 +1,42 @@
 ﻿@model Inmobiliaria3.Models.Alquiler
 
 @{
-    ViewData["Title"] = "Alquilar";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Nuevo alquiler/contrato</h1>
+<h1>Editar contrato de alquiler</h1>
 
 <h4>Alquiler</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Alquilar">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="Id" value="@ViewBag.Id" />
+            <input type="hidden" name="IdInmueble" value="@ViewBag.idInmueble" />
             <div class="form-group">
                 <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
+                <input asp-for="Precio" class="form-control" value="@ViewBag.Precio" />
                 <span asp-validation-for="Precio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FechaInicio" class="control-label"></label>
-                <input asp-for="FechaInicio" class="form-control" />
+                <input asp-for="FechaInicio" class="form-control" value="@ViewBag.FechaInicio" />
                 <span asp-validation-for="FechaInicio" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FechaFin" class="control-label"></label>
-                <input asp-for="FechaFin" class="form-control" />
+                <input asp-for="FechaFin" class="form-control" value="@ViewBag.FechaFin" />
                 <span asp-validation-for="FechaFin" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Crear contrato" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Volver a la lista</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 

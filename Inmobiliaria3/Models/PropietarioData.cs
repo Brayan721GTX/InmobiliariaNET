@@ -122,6 +122,12 @@ namespace Inmobiliaria3.Models
         {
             SqlConnection conn = Conexion.getConnection();
 
+            List<Inmueble> inmuebles = new InmueblesData().obtenerInmueblesDePropietario(id);
+
+            foreach (Inmueble i in inmuebles) {
+                new InmueblesData().eliminar(i.Id);
+            }
+
             String sql = "DELETE FROM propietario WHERE id = " + id;
 
             SqlCommand command = new SqlCommand(sql, conn);

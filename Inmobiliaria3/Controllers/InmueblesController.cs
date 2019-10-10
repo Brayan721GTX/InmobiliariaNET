@@ -100,10 +100,6 @@ namespace Inmobiliaria3.Controllers
                 return View();
         }
 
-        public ActionResult Alquilar(int IdInmueble) {
-            //return RedirectToAction("Create", "Alquileres", new { Id = Request.Form["Id"]});
-            return RedirectToAction("Create", "Alquileres", new { IdInmueble = IdInmueble });
-        }
 
         // GET: Inmuebles/Edit/5
         public ActionResult Edit(int id)
@@ -120,6 +116,13 @@ namespace Inmobiliaria3.Controllers
             try
             {
                 // TODO: Add update logic here
+                if (Request.Form["disponible"] == "on")
+                {
+                    i.Disponible = true;
+                }
+                else {
+                    i.Disponible = false;
+                }
                 new InmueblesData().editar(i);
 
                 return RedirectToAction(nameof(Index));

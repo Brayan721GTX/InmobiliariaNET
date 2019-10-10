@@ -35,7 +35,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Disponible)
             </th>
-            <th></th>
+            <th>
+
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -60,11 +62,18 @@
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Disponible)
+                @if (item.Disponible)
+                {
+                    @Html.DisplayFor(modelItem => item.Disponible, new { @checked = "checked" })
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Disponible)
+                }
             </td>
             <td>
                 @Html.ActionLink("Ver contratos", "ListarContratos", "Alquileres", new { id = item.Id }) |
-                @Html.ActionLink("Alquilar", "Alquilar", new { IdInmueble = item.Id }) |
+                @Html.ActionLink("Alquilar", "Create", "Alquileres",  new { id = item.Id }) |
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
             </td>
